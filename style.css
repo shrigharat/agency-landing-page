@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+    --main-color: #fff;
+    --text-color: #111;
+    --highlight-color: #2727e6;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body.dark-mode{
+    --main-color: #111;
+    --text-color: #f1f1f1;
+    --highlight-color: #ff4141;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-color);
+    color: var(--text-color);
+    font-family: 'Space Mono', monospace;
+    line-height: 40px;
+    font-size: 20px;
+
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+}
+
+h1{
+    position: fixed;
+    top: 32px;
+    left: 32px;
+}
+
+h1 rect{
+    fill: var(--highlight-color);
+}
+
+a{
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color .4s;
+}
+
+a:hover{
+    color: var(--highlight-color);
+}
+
+a.dark-mode-toggle{
+    position: fixed;
+    bottom: 32px;
+    left: 32px;
+}
+
+a.dark-mode-toggle g.toggle circle{
+    transition: transform .4s;
+}
+
+a.dark-mode-toggle:hover g.toggle circle{
+    transform: scale(1.75);
+}
+
+a.menu-toggle{
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    z-index: 1;
+}
+
+a.menu-toggle rect, a.dark-mode-toggle circle{
+    fill: currentColor;
+}
+
+a.dark-mode-toggle rect{
+    stroke: currentColor;
+}
+
+.dead-center-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+
+.side-menu, .nav-layer-bottom, .nav-layer-mid{
+    position: fixed;
+    background-color: var(--main-color);
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    top: 0;
+    right: 0;
+    padding: 48px; 
+    transform: translateX(100%);   
+    transition: transform .5s 0s ease;
+}
+
+.side-menu nav{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-layer-bottom {
+    background-color: var(--text-color);
+    transition-delay: 0.2s;
+}
+
+.nav-layer-mid {
+    background-color: var(--highlight-color);
+    transition-delay: 0.1s;
+}
+
+body.menu-open .side-menu, 
+body.menu-open .nav-layer-bottom, 
+body.menu-open .nav-layer-mid {
+    transform: translateX(0);
+    transition-delay: .2s;
+}
+
+body.menu-open .nav-layer-mid{
+    transition-delay: .1s;
+}
+
+body.menu-open .nav-layer-bottom{
+    transition-delay: 0s;
+}
+
+nav div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+nav div.internal-links{
+    font-size: 48px;
+    line-height: 64px;
+    flex: 1;
+}
+
+
+.wipe{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: var(--highlight-color);
+    z-index: 2;
+    transition: background-color 0.0001s 2s;
+}
+
+svg.spiral{
+    border: 2px solid var(--highlight-color);
+}
+
+svg.spiral rect{
+    stroke: var(--highlight-color);
+    fill: var(--highlight-color);
+    fill-opacity: 0;
+}
+
+svg.spiral rect:hover{
+    fill-opacity: 0.25;
+}
+
+section{
+    background-image: url(/assets/icons/grid.svg);
+    background-position: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    transform: translate(0, 0);
+    transition: transform 0.4s;
+}
+
+body.menu-open section{
+    transform: translate(-80px, 0);
+}
+
+@media (max-width: 1000px) {
+    .side-menu, .nav-layer-bottom, .nav-layer-mid{
+        max-width: 420px;
+    }
+    nav div.internal-links{
+        font-size: 42px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1{
+        font-size: 32px;
+        vertical-align: middle;
+    }
+    .dark-mode-toggle span, .menu-toggle span{
+        font-size: 1rem;
+    }
+
+    .menu-toggle svg{
+        height: 30px;
+        width: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    h1{
+        font-size: 20px;
+        left: 1rem;
+        display: flex;
+        gap: 0.5rem;
+    }
+    a.dark-mode-toggle{
+        left: 1rem;
+    }
+    a.menu-toggle{
+        right: 1rem;
+    }
+    .dark-mode-toggle span{
+        font-size: 0.9rem;
+    }
+    .menu-toggle span{
+        display: none;
+    }
+
+    section svg{
+        width: 290px;
+        height: 290px;
+    }
+
+    /* .side-menu, .nav-layer-bottom, .nav-layer-mid{
+        max-width: 420px;
+    }
+    nav div.internal-links{
+        font-size: 42px;
+    } */
+}
